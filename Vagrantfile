@@ -41,7 +41,10 @@ Vagrant::Config.run do |config|
   config.vm.share_folder "oppg", "~/oppgaver", "./oppgaver"
   config.vm.share_folder "src", "~/book-examples", "./book-examples"
 
-  config.vm.provision :shell, :inline => "apt-get update && apt-get -y install python-matplotlib python-scitools"
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "manifests"
+    puppet.manifest_file = "default.pp"
+  end  
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
